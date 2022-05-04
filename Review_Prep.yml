@@ -1,0 +1,20 @@
+1.  How do you check for disk free space =df -h
+2.  How do you check for disk usage = du -h
+3.  How can you run a script in background mode= sh scriptname.sh&, bash scriptname.sh&, ./scriptname.sh&
+4.  How can you run a script during network instability= nohup bash scriptname.sh
+5.  Do you know any awk commands? = yes, awk '{commands}' filename
+6.  Have you use any FTP protocol before?=yes, scp, winscp
+7.  What are the 3 pieces of information you need to ssh into a remote linux host= ip address, key,username
+8.  How can you check the number of lines in a file= wc -l
+9.  How can you check the number of words in a file= wc -w
+10. How can you compare the content of two files = diff filename1 filename2
+11. How do you troubleshoot an application running slow= to be explained later 
+12. What is your experience with incident management= to be explained later
+13. How do you access a mysql databse from your command terminal and what are the informations needed= sudo mysql -u username -p <enter>
+14. How do you show the list of databases present in mysql? = show databases; <ENTER>
+15. How do you select a database table from the database? = use tablename; <enter>
+16. Which file do you check if a user is not able to ssh into a remote linux host?= /etc/ssh/sshd_config
+17. Do you have any selinux experience? yes, we enforce it for security activities within the system , $ setenforce
+18. What command can you use to change the permission of a file? = chmod
+19. How can i display the last 100 lines of a file? = tail -100 filename
+20. How do you check the presence of a word in a file?= grep keyword filename, cat filename | grep keyword, sed -n 'p/filename/keyword'

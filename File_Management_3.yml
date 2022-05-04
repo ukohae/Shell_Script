@@ -1,0 +1,187 @@
+File Management in Linux:
+
+In Linux, most of the operations are performed on files. And to handle these files Linux has directories also known as folders which are maintained in a 
+tree-like structure. Though, these directories are also a type of file themselves. Linux has 3 types of files:
+
+Regular Files: It is the common file type in Linux. it includes files like – text files, images, binary files, etc. Such files can be created using the touch 
+command. They consist of the majority of files in the Linux/UNIX system. The regular file contains ASCII or Human Readable text, executable program binaries, 
+program data and much more.
+Directories: Windows call these directories as folders. These are the files that store the list of file names and the related information. The root directory(/) 
+is the base of the system, /home/ is the default location for user’s home directories, /bin for Essential User Binaries, /boot – Static Boot Files, etc. We could 
+create new directories with mkdir command.
+Special Files: Represents a real physical device such as a printer which is used for IO operations. Device or special files are used for device Input/Output(I/O) 
+on UNIX and Linux systems. You can see them in a file system like an ordinary directory or file.  
+
+
+1. Files Listing
+ls command :
+The ls command is used to view the contents of a directory. By default, this command will display the contents of your current working directory.
+If you want to see the content of other directories, type ls and then the directory’s path. For example, enter ls /home/ubuntu/documents to view the content of documents.
+
+There are variations or options you can use with the ls command:
+
+ls -R will list all the files in the sub-directories as well
+ls -a will show the hidden files
+ls -al will list the files and directories with detailed information like the permissions, size, owner, etc.
+
+
+2. Creating Files
+touch command can be used to create a new file. It will create and open a new blank file if the file with a filename does not exist. And in case the file already exists then the 
+file will not be affected.
+$touch test :
+$touch test{1..10}.txt :
+
+
+Create File with cat Command
+The cat command is short for concatenate. It can be used to output the contents of several files, one file, or even part of a file. If the file doesn’t exist, the Linux cat command 
+will create it.
+To create an empty file using cat, enter the following:
+
+$cat > test1.txt :
+
+create a file with some contents in it using the cat command.
+Just type cat > sample.txt at the terminal prompt
+$cat > sample.txt :
+This is some really cool text
+This line isn't nearly as cool as the last one.
+
+When you are done, press Ctrl+D to exit the file and return to the prompt.
+
+Create a Text File Using the echo Command
+If we run the following commands:
+
+echo "This is how we do it" > test2 #create 1st file
+echo "*This is how we do it*" > test3 #create 2nd file
+cat test1 test2
+
+echo "File 1 Contents" > file4
+echo "File 2 Contents" > file5
+echo "File 3 Contents" > file6
+cat file4 file5 file6 > combined_file
+cat combined_file
+
+creating a directory:
+  
+  mkdir -p  Etech/team1/team2/team3 
+  mkdir -p devops/git/jenkins/maven/sonaqube/tomcat/docker/kubernetes/ansible/terraform/aws
+  mkdir -pv team/linux-admins/application-support/devops-engineers/sre
+
+
+
+$grep command :
+It lets you search through all the text in a given file.
+
+whereis command :
+
+moving files around
+SCP (secure copy) is a command-line utility that allows you to securely copy files and directories between two locations.
+With scp, you can copy a file or directory
+
+From your local system to a remote system.
+From a remote system to your local system.
+Between two remote systems from your local system.
+When transferring data with scp, both the files and password are encrypted so that anyone snooping on the traffic doesn’t get anything sensitive.
+
+scp -i <keyName> <filename> ubuntu@hostname:   (copies the file into ubuntu's home directory)
+scp -i oregon-main-key.pem file1.txt ubuntu@34.220.116.170:  
+scp -i <filename> ubuntu@hostname:<folderName> (copies the file into the specified directory in ubuntu's home)
+scp -i oregon-main-key.pem file1.txt ubuntu@34.220.116.170:demo
+scp -r -i 'key' <directoryename> ubuntu@hostname:/<some-directory> (copies the file into a directory not in your home directory)
+scp -i oregon-main-key.pem -r directory ubuntu@34.220.116.170:/tmp
+
+
+
+
+
+
+$man –
+This command is used to view the on-line reference manual pages for commands/programs.
+$ man grep
+$ man mkdir
+
+
+To delete a file use the rm command followed by the file name as an argument:
+
+$rm file.txt
+
+rm accepts one or more file or directory names as its arguments.
+
+The -i option tells rm to prompt the user for each given file before removing it:
+
+$rm -i file.txt
+
+rm: remove regular empty file 'file.txt'?
+
+Use the -d option to remove one or more empty directories:
+
+$rm -d dirname
+
+To remove non-empty directories and all the files within them recursively, use the -r (recursive) option:
+
+$rm -rf dirname
+
+The -f option tells rm never to prompt the user and to ignore nonexistent files and arguments.
+
+
+$exit Command
+The exit command does exactly what its name suggests: With it, you can end a shell session and, in most cases, automatically close the terminal you’re using:
+
+$shutdown Command
+As you may guess, the shutdown command lets you power off your machine. However, it also can be used to halt and reboot it.
+
+To power off your computer immediately (the default is one minute), type:
+$shutdown now
+You can also schedule to turn off your system in a 24-hour format:
+$shutdown 20:40
+To cancel a previous shutdown call, you can use the -c flag:
+$shutdown -c 
+$uptime 
+
+
+
+Linux Basic Commands:
+1. pwd command
+Use the pwd command to find out the path of the current working directory (folder) you’re in. 
+The command will return an absolute (full) path, which is basically a path of all the directories 
+that starts with a forward slash (/). An example of an absolute path is /home/username. 
+
+
+ 2. cd command
+To navigate through the Linux files and directories, use the cd command. It requires either the full path or the name of the directory, depending on the current working directory that you’re in.
+
+Let’s say you’re in /home/username/Documents and you want to go to Photos, a subdirectory of Documents. To do so, simply type the following command: cd Photos.
+
+Another scenario is if you want to switch to a completely new directory, for example,/home/username/Movies. In this case, you have to type cd followed by the directory’s absolute path: cd /home/username/Movies.
+
+There are some shortcuts to help you navigate quickly:
+
+cd .. (with two dots) to move one directory up
+cd to go straight to the home folder
+cd- (with a hyphen) to move to your previous directory
+On a side note, Linux’s shell is case sensitive. So, you have to type the name’s directory exactly as it is.
+
+
+
+4. cat command
+cat (short for concatenate) is one of the most frequently used commands in Linux. It is used to list the contents of a file on the standard output (sdout). To run this command, type cat followed by the file’s name and its extension. For instance: cat file.txt.
+
+Here are other ways to use the cat command:
+
+cat > filename creates a new file
+cat filename1 filename2>filename3 joins two files (1 and 2) and stores the output of them in a new file (3)
+to convert a file to upper or lower case use, cat filename | tr a-z A-Z >output.txt
+
+6. mv command
+The primary use of the mv command is to move files, although it can also be used to rename files.
+
+The arguments in mv are similar to the cp command. You need to type mv, the file’s name, and the destination’s directory. For example: 
+mv file.txt /home/username/Documents.
+
+To rename files, the Linux command is mv oldname.ext newname.ext
+
+
+
+
+
+
+

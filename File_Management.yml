@@ -1,0 +1,100 @@
+Monday, 04-18-2022:
+==================
+How do you archive files from a directory?
+
+$ tar -cvf backup.tar $directory
+
+How do you open a tar file?
+
+$ tar -xvf $filename.tar
+
+what command will you use to donwloads files in linux?
+
+$ wget command or curl command
+
+softlinks and hardlinks:
+
+softlinks: - it is a short cut to a component
+           - If the original copy is deleted hence the softlink becomes inactive
+           - It occupies less memory since only the original copy uses resources
+
+How can you create a softlink?
+$ ln -s /home/ubuntu/test   /tmp/test
+
+Hardlinks: It is a clone link to a component
+           - If the original copy of file is deleted ,a clone will stay active
+           - Is good for data persistences but uses more resources
+
+How can you create a hardlink?
+$ ln /home/ubuntu/test /tmp/test
+
+Q: how do you modify the date and time of the server?
+    ans: date mmddHHMMyy
+    date +%r 
+    date +%m/%d/%y
+    date +%m/%d/%y:%H:%M:%S
+
+Q: how do you modify a user profile?
+       Ans: sudo vi .profile
+Q: how do you modify system profile?
+       Ans: sudo vi /etc/profile
+
+    Package management: use for redhat
+    rpm( redhat package manager)
+    rpm -qa (query all install packages)
+    rpm -qip(query info of package)
+    rpm -qlp( list content of package)
+    rpm -Uvh(to install a package)
+    yum (package manager for redhat)
+    apt or apt-get (ubuntu)
+
+
+   Variables:
+      -system Variables
+      Q: what is a variable? A variable is a replaceable entity containing a value
+      Q: what is a system variable? These are variables defined by the system
+      example USER, PATH,HOSTNAME,HOME etc
+
+      note: use the "env" command to check your environmental variables
+      -custom Variables
+
+      Q: what is a custom variable? these are variables defined by an admin or any user
+      example y=Ayo in this case 'y' is a custom variable
+
+      -special variable
+      Q: what is a special variable? These are variables defined by the system for shell functionalities
+      example $?
+      Q: How do you display the value of a variable?
+      ans: echo $variablename
+
+
+File permissions commands:
+  $ chmod 777 ---> full permissions
+  $ chown ---> gives permissions to a particular user
+
+  n-bits = 3 2^n different things 
+
+  rwx
+  r= read 
+  w= write
+  x= execute
+                 owner  group
+  -rw-rw-r-- 1 ubuntu ubuntu      4069 Apr 18 23:53 etech.log
+
+  numeric file permissions(check the channel for the table)
+
+
+
+ll $(sudo find $(pwd) -mtime +30):Use to display files and directories that are 30 days old and their permissions
+ll $(sudo find $(pwd) -type f -mtime +30): use to display only files and their permissions
+ll $(sudo find $(pwd) -type d -mtime +30): use to display directories ONLY with their permissions
+ll $(sudo find $(pwd) -name "*.sh" -type f -mtime +30): use to filter files with the .sh extension only and their permissions
+
+User Account Management:
+========================
+
+Note: Accounts you create on your shell terminal are all local accounts.
+special files:
+  1. /etc/sudoers --> is use to store user account for "sudo" privilages
+  2. /etc/profile ---> stores user profile data
+  3. /etc/ssh/sshd_config --> use to control ssh connections

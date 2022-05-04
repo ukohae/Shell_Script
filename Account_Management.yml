@@ -1,0 +1,73 @@
+Tuesday,04-19-2022:
+-=================
+User Account Management:
+========================
+
+Note: Accounts you create on your shell terminal are all local accounts.
+special files:
+  1. /etc/sudoers --> is use to store user account for "sudo" privilages
+  2. /etc/profile ---> stores user profile data
+  3. /etc/ssh/sshd_config --> use to control ssh connections
+  4. /etc/shadow  --> use to store password harsh
+
+  commands: to create local user
+$ sudo adduser akudo
+$ sudo passwd akudo --> to assign a password for user "akudo"
+
+  commands: to create local group
+$ sudo addgroup etech
+$ sudo cat /etc/group
+
+  commands: to add a user to group
+$ sudo usermod -aG etech akudo
+$ sudo gpasswd --delete akudo etech --> to remove the user from a group
+
+command: to get informations about a local user
+$ id $user  
+
+
+Command line argument:
+echo $0 = script name
+echo $? = the status of last run command
+echo $@ = number of arguments to scripts
+echo $$ = process id
+echo $1 = first argument
+echo $* = number of arguments to script
+
+additions in linux:
+
+$ expr $a + $b --> use to add two numbers
+$ bc  --> means "bash calculator" can be use to process decimal numbers
+$ echo $[ 1 + 2 ]
+
+=======================================================================================================
+# item=("mango","orange","apple","paw-paw","grape","banana")
+
+# item[0]= "mango"
+
+# if [["$item[3]" -eq "paw-paw"]]; then
+#   echo $item[3]
+#       0          1    2    3    4
+# scriptname.sh  arg1 arg2 arg3 arg4.........arg10 
+
+# echo ${10} 
+
+# [[ ]]
+
+# num1
+# num2
+# sum       sum=$[$num1 + $num2]
+#           echo $sum 
+
+#   sum=num1 + num2 
+
+  
+ # if [["${BUILD_NUMBER}" -eq "100"]]; then
+ #     sh 'docker build -t etechapp .'
+ #     echo " this build was a success"
+ #     else
+ #       sh ' docker pull $image_version'
+ #       fi 
+
+
+

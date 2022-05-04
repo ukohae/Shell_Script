@@ -1,0 +1,34 @@
+Use terraform to create 3 EC2 Instance- DEV, UAT, PROD
+
+# Change Hostname accordingly in the EC2 i.e this is for prod, change hostname for dev, uat
+sudo hostnamectl set-hostname prod
+
+# Switch to prod, do thesame for dev, uat
+sudo su - ubuntu
+
+# Add the same user on DEV, UAT, PROD
+sudo adduser ec2-user
+
+# Edit config file
+sudo vi /etc/ssh/sshd_config
+
+# Configure password and set to yes
+PasswordAuthentication yes
+
+# Restart server
+sudo service sshd restart
+
+# do chown /home/ubuntu for DEV, UAT, PROD
+
+sudo chown -R ec2-user /home/ubuntu
+
+
+# Connect with server using password
+ssh ec2-user@ip_address 
+
+
+# install ssh pass in control  machine
+sudo apt install sshpass -y
+
+# Error code: 6 , ssh into DEV, UAT, PROD in the Control machine(Ubuntu)
+ssh ec2-user@private_ip

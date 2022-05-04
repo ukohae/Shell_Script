@@ -1,0 +1,16 @@
+Process management:
+===================
+Commands to check processes:
+$ watch --> use to analyzed real time processes every 2 seconds
+$ cat /etc/shells  --> use to check all the shells supported by the system
+$ top --> use to to analyzed all processes within the system
+$ ps --> use to get informations about running processes
+$ ps -ef  ---> use to check for a running application process within the system
+
+Native services --> These are services that can be install using package managers   
+Non-Native services --> These are services that are define by the operator in the /etc/systemd/system
+                          directory
+some files commands:
+===================
+$ ls -lth ---> to display files in a directory from biggest to smallest
+$ ls -lrth --> to display files in a directory from smallest to biggest
