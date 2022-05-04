@@ -1,0 +1,87 @@
+Monday, 05-02-2022:
+===================
+
+switch case: use to compress codes so as to reduce writting many lines
+
+syntax
+case "VAR" in 
+	Result1){};;
+    Result2){};;
+    Result3){};;
+esac
+  #switch case
+CARS="$1"
+#CARS1= "$2"
+  
+#Pass the variable in string
+case "$CARS" in
+    #case 1
+    "mercedes") echo "Headquarters - Affalterbach, Germany" ;;
+      
+    #case 2
+    "audi") echo "Headquarters - Ingolstadt, Germany" ;;
+      
+    #case 3
+    "bmw") echo "Headquarters - Chennai, Tamil Nadu, India" ;;
+esac
+
+Continue: use to control flow sequence of proceses at a specific point
+
+example
+#!/bin/bash
+i=0
+while [[ $i -lt 5 ]]; do
+  ((i++))
+  if [[ "$i" == '2' ]]; then
+    continue
+  fi
+  echo "Number: $i"
+done
+
+echo 'All Done!'
+
+
+i=$[ $i + 1 ]
+
+
+Cronjobs: These are automated tasks configured to run at specific time triggered by the system timer
+           and control by cron deamon in the background
+
+ what command can you use to stop all cronjobs?
+ ans: $ sudo systemctl stop cron # disbale all cronjob configs
+      $ sudo systemctl status cron # to check the status of the cron daemon
+      $ sudo systemctl restart cron # to refresh the cron daemon
+
+syntax of cron job settings:
+
+a b c d e /directory/command output  # syntax format for configuring a cronjob
+
+a --> Minutes    0-59
+b --> Hour       0-23
+c --> Day of month 0-31
+d --> Month     0=none,12=december
+e --> Day of the week  0=sunday,7=sunday    0=sunday, 1=monday,2=tuesday,3=wednesday 4=thursday, 5=friday,6=saturday,7=sunday
+
+cron format
+* * * * * /directory/scriptname.sh > /output
+
+examples
+* 2 0 * 4 /root/backup.sh --> every 2am on wednesdays every month
+* 2 0 * * /root/backup.sh --> every 2am every day
+30 * * * * /root/backup.sh --> every 30 minutes
+0 * * * */root/backup.sh  --> every minutes
+0 2 * * * /root/backup.sh --> every 2 hours
+0 23 * * *
+=====================================================================================
+system_check(){
+df -h 
+free -g 
+}
+---------
+---------
+---------
+system_check
+
+versions.env 
+
+versions=( tag1 tag2 tag3 tag4 )
