@@ -1,0 +1,1369 @@
+Linux commands:
+  Bash = Bornagain Shell
+  / --> root directory
+
+  two types of users
+  1.regular users ---> local user
+  2.superuser --> root user
+
+  /bin   /sbin
+
+  sudo == superuserdoer
+
+  cd = change directory
+  sudo hostnamectl set-hostname etech-linux
+  su == swicth user
+  pwd == Present working directory 
+  /home/ubuntu ==ubuntu user home directory
+  ls == lists
+  mkdir  ==make a directory
+  touch file{1..10} --. use to create multiple files
+  vi ---> virtual instarument
+
+NOTE: WE ls to see the content of a directory
+      WE cat a file to see its contents
+
+ll --> long list
+ll -lh --> print directory contents with their permissions and file sizes
+
+h stands for human readable format
+note: you can not delete a directory that contents data
+rmdir --> to remove a directory gracefully after clean up
+rm -rf --> use to forcely remove a directory with contents
+
+tail -n  --> use to filter contents of a file from the last nth lines
+head -n  --> use to filter contents of a file from the first nth lines
+cat -n /etc/passwd --> to display the content of a file with numbers
+wc -l /etc/passwd  --> to check the number of lines in a file
+wc -w /etc/passwd  --> to check the number of words in a file
+cat -n /etc/passwd | sed -n -e '20,25p' --. use to stream contents of a large file from lines
+20 to line 25
+
+less --> is use to display contents of a file by small increment %
+
+more --> is use to display contents of a file in large increment %
+sort --> Arrange the content of a file from A-Z
+sort -r --> Arrange the content of a file from Z-A
+logname --> use to check who originally log into the server
+whoami --> use to check who is currently using the terminal or Shell
+watch --> use to monitor the content of directory or file every 2s
+echo --> use to write or print data into a file
+mv --> use to rename a file
+cp --> use to create a copy of a file
+cp -r --> use to create a copy of a directory
+
+#----------------------------------------------------------------------------------------------------------------------------------->
+
+File Management in Linux:
+
+In Linux, most of the operations are performed on files. And to handle these files Linux has directories also known as folders which are maintained in a 
+tree-like structure. Though, these directories are also a type of file themselves. Linux has 3 types of files:
+
+Regular Files: It is the common file type in Linux. it includes files like – text files, images, binary files, etc. Such files can be created using the touch 
+command. They consist of the majority of files in the Linux/UNIX system. The regular file contains ASCII or Human Readable text, executable program binaries, 
+program data and much more.
+Directories: Windows call these directories as folders. These are the files that store the list of file names and the related information. The root directory(/) 
+is the base of the system, /home/ is the default location for user’s home directories, /bin for Essential User Binaries, /boot – Static Boot Files, etc. We could 
+create new directories with mkdir command.
+Special Files: Represents a real physical device such as a printer which is used for IO operations. Device or special files are used for device Input/Output(I/O) 
+on UNIX and Linux systems. You can see them in a file system like an ordinary directory or file.  
+
+
+1. Files Listing
+ls command :
+The ls command is used to view the contents of a directory. By default, this command will display the contents of your current working directory.
+If you want to see the content of other directories, type ls and then the directory’s path. For example, enter ls /home/ubuntu/documents to view the content of documents.
+
+There are variations or options you can use with the ls command:
+
+ls -R will list all the files in the sub-directories as well
+ls -a will show the hidden files
+ls -al will list the files and directories with detailed information like the permissions, size, owner, etc.
+
+
+2. Creating Files
+touch command can be used to create a new file. It will create and open a new blank file if the file with a filename does not exist. And in case the file already exists then the 
+file will not be affected.
+$touch test :
+$touch test{1..10}.txt :
+
+
+Create File with cat Command
+The cat command is short for concatenate. It can be used to output the contents of several files, one file, or even part of a file. If the file doesn’t exist, the Linux cat command 
+will create it.
+To create an empty file using cat, enter the following:
+
+$cat > test1.txt :
+
+create a file with some contents in it using the cat command.
+Just type cat > sample.txt at the terminal prompt
+$cat > sample.txt :
+This is some really cool text
+This line isn't nearly as cool as the last one.
+
+When you are done, press Ctrl+D to exit the file and return to the prompt.
+
+Create a Text File Using the echo Command
+If we run the following commands:
+
+echo "This is how we do it" > test2 #create 1st file
+echo "*This is how we do it*" > test3 #create 2nd file
+cat test1 test2
+
+echo "File 1 Contents" > file4
+echo "File 2 Contents" > file5
+echo "File 3 Contents" > file6
+cat file4 file5 file6 > combined_file
+cat combined_file
+
+creating a directory:
+  
+  mkdir -p  Etech/team1/team2/team3 
+  mkdir -p devops/git/jenkins/maven/sonaqube/tomcat/docker/kubernetes/ansible/terraform/aws
+  mkdir -pv team/linux-admins/application-support/devops-engineers/sre
+
+
+
+$grep command :
+It lets you search through all the text in a given file.
+
+whereis command :
+
+moving files around
+SCP (secure copy) is a command-line utility that allows you to securely copy files and directories between two locations.
+With scp, you can copy a file or directory
+
+From your local system to a remote system.
+From a remote system to your local system.
+Between two remote systems from your local system.
+When transferring data with scp, both the files and password are encrypted so that anyone snooping on the traffic doesn’t get anything sensitive.
+
+scp -i <keyName> <filename> ubuntu@hostname:   (copies the file into ubuntu's home directory)
+scp -i oregon-main-key.pem file1.txt ubuntu@34.220.116.170:  
+scp -i <filename> ubuntu@hostname:<folderName> (copies the file into the specified directory in ubuntu's home)
+scp -i oregon-main-key.pem file1.txt ubuntu@34.220.116.170:demo
+scp -r -i 'key' <directoryename> ubuntu@hostname:/<some-directory> (copies the file into a directory not in your home directory)
+scp -i oregon-main-key.pem -r directory ubuntu@34.220.116.170:/tmp
+
+
+
+
+
+
+$man –
+This command is used to view the on-line reference manual pages for commands/programs.
+$ man grep
+$ man mkdir
+
+
+To delete a file use the rm command followed by the file name as an argument:
+
+$rm file.txt
+
+rm accepts one or more file or directory names as its arguments.
+
+The -i option tells rm to prompt the user for each given file before removing it:
+
+$rm -i file.txt
+
+rm: remove regular empty file 'file.txt'?
+
+Use the -d option to remove one or more empty directories:
+
+$rm -d dirname
+
+To remove non-empty directories and all the files within them recursively, use the -r (recursive) option:
+
+$rm -rf dirname
+
+The -f option tells rm never to prompt the user and to ignore nonexistent files and arguments.
+
+
+$exit Command
+The exit command does exactly what its name suggests: With it, you can end a shell session and, in most cases, automatically close the terminal you’re using:
+
+$shutdown Command
+As you may guess, the shutdown command lets you power off your machine. However, it also can be used to halt and reboot it.
+
+To power off your computer immediately (the default is one minute), type:
+$shutdown now
+You can also schedule to turn off your system in a 24-hour format:
+$shutdown 20:40
+To cancel a previous shutdown call, you can use the -c flag:
+$shutdown -c 
+$uptime 
+
+
+
+Linux Basic Commands:
+1. pwd command
+Use the pwd command to find out the path of the current working directory (folder) you’re in. 
+The command will return an absolute (full) path, which is basically a path of all the directories 
+that starts with a forward slash (/). An example of an absolute path is /home/username. 
+
+
+ 2. cd command
+To navigate through the Linux files and directories, use the cd command. It requires either the full path or the name of the directory, depending on the current working directory that you’re in.
+
+Let’s say you’re in /home/username/Documents and you want to go to Photos, a subdirectory of Documents. To do so, simply type the following command: cd Photos.
+
+Another scenario is if you want to switch to a completely new directory, for example,/home/username/Movies. In this case, you have to type cd followed by the directory’s absolute path: cd /home/username/Movies.
+
+There are some shortcuts to help you navigate quickly:
+
+cd .. (with two dots) to move one directory up
+cd to go straight to the home folder
+cd- (with a hyphen) to move to your previous directory
+On a side note, Linux’s shell is case sensitive. So, you have to type the name’s directory exactly as it is.
+
+
+
+4. cat command
+cat (short for concatenate) is one of the most frequently used commands in Linux. It is used to list the contents of a file on the standard output (sdout). To run this command, type cat followed by the file’s name and its extension. For instance: cat file.txt.
+
+Here are other ways to use the cat command:
+
+cat > filename creates a new file
+cat filename1 filename2>filename3 joins two files (1 and 2) and stores the output of them in a new file (3)
+to convert a file to upper or lower case use, cat filename | tr a-z A-Z >output.txt
+
+6. mv command
+The primary use of the mv command is to move files, although it can also be used to rename files.
+
+The arguments in mv are similar to the cp command. You need to type mv, the file’s name, and the destination’s directory. For example: 
+mv file.txt /home/username/Documents.
+
+To rename files, the Linux command is mv oldname.ext newname.ext
+
+#----------------------------------------------------------------------------------------------------------------------------------->
+
+The find command:
+The find command is used to search and locate the list of files and directories based on conditions you specify for files that match the arguments.
+find command can be used in a variety of conditions like you can find files by permissions, users, groups, file types, date, size, and other possible criteria.
+IP = Internet Protocol
+what is an IP?
+Ans: An IP address is a unique 32-bits number assign dynamically by a DHCP SERVER or staticly by an Admin to a 
+     device on a network
+$sudo find / -name "*file.yaml" --> find from root any file with extension file.yaml
+$sudo find / -name etechfile.yaml  -->search all directories in your OS
+$sudo find . -name etechfile.yaml   -->Find all the files whose name is etechfile.yaml in a current working directory.
+$sudo find /tmp -name etechfile.yaml  -->Find all the files under /tmp directory with the name etechfile.yaml.
+$sudo find $(pwd) -mtime -2         -->find and delete files that are less than 2 days younger
+$sudo find /opt/backup -name text -type f -mtime +30 -delete   -->find and delete files that are more than 30 days old
+$sudo find /var/log -name "*.log" -type f -mtime +30 -delete  -->find and delete files that ends with log and are less than 2 days old
+$sudo find /var/log -type d -mtime +90   -->find and delete directories that are more than 90 days old
+$sudo find /home -iname etechfile.yaml   -->Find all the files whose name is tecmint.txt and contains both capital and small letters in /home directory.
+$sudo find / -type d -name etechfile.yam  -->Find all directories whose name is etechfile.yaml in / directory.
+
+Special linux commands:
+$ date --> to check the date
+$ cal --> to check the calendar
+$uptime --> is used to check how long a system has been running
+$ DO NOT RUN $ reboot
+
+What are Linux Logs? :
+Linux logs provide a timeline of events for the Linux operating system, applications and system and are a valuable troubleshooting tool when you encounter issues. 
+When issues arise, analyzing log files is the first thing an administrator needs to do.
+Linux log files are stored in plain-text and can be found in the /var/log directory and subdirectory. There are Linux logs for everything: 
+system, kernel, package managers, boot processes, Xorg, Apache, MySQL, etc.
+Log Files in Linux:
+system log files:
+
+        /var/log/kern.log --> stores Kernel logs and warning data. This log is valuable for troubleshooting custom kernels as well
+         /var/log/auth.log. -->This is where you will find information about user authorization attempts; including the use of the sudo command.
+sudo less /var/log/auth.log --> to inspect the content of the auth.log file.
+grep memory /var/log/kern.log
+sudo less /var/log/auth.log | grep user
+sudo less /var/log/kern.log
+sudo head /var/log/kern.log
+
+
+Basic Linux Disk Management Commands :
+Disk management:
+/dev/sda1
+
+Your operating system,applications, and data all need to be kept on some kind of permenent
+storage so that when you turn off your computer and then ON again, your data is intack.
+When you install the operating system, the disk is divided into one or more partions.
+Disks: use for permenent storage
+RAM(RandomAccessMemory): use for temporary storage
+Swap: use for temporary storage
+for example when you run a command, that command is copied from the hard disk into RAM so that
+your computer processor(CPU) can access it quickly.
+Linux disk management commands:
+  $ df -h ---> use to check disk free space
+  $ du -h ----> use to check for disk usage
+  $ free -m --> use to check memory free space in megabytes
+  $ free -g --->  use to check memory free space in gigabytes
+  $ lscpu ---> use to check the cpu statistics
+  $ ls -i ---> use to show the position of a file within the linux filesystem
+
+Disks commands:
+  $ parted -l /dev/sda   --->use to view partions
+  $ fdisk -l /dev/sda     --->use to format a drive
+  $ lsblk       ----->to see the different partitions block
+  $  mount      ------>use to munt a drive
+  $ unmount     ----->use to unmount a drive
+  /mnt          ----->is the default mount directory in linux
+  $ mkdir /mnt/test
+  $ mount /dev/sdb1 /mnt/test
+  $ df -h /mnt/sdb1   ----> h stands for human readable format
+  fstab( File System Table)  ---->use to permenently mount a drive to the file system
+  /dev/sdb1   /mnt/test  xfs  defaults  0 1    ---->is sample fstab entry
+  xfs: is the filesystem
+  defaults: means that the partition should be mounted at boot time
+  number 0: tells the system not to backup files automatically from this filesystem
+  number 1: tells the system to check the partition for errors after a certain number of mounts
+
+  swap: Used for swap partitions.swap areas are used to hold data temporarily when RAM is used up.
+        Data swapped to the swap area and then returned to RAM when it is needed again
+  nfs: Network filesystem
+  xfs: A high-performance filesystem originally developed by silicon graphics that works extremely well
+       with large file.
+
+
+
+ Network management:
+ Linux Networking Commands
+ Linux networking commands are used extensively to inspect, analyze, maintain, and troubleshoot the network/s connected to the system. 
+ Let us first know the list of the basic networking commands used in Linux followed by a detailed explanation of each.
+
+1. ifconfig 
+2. ip
+3. traceroute
+5. ping
+6. netstat
+8. dig
+9. nslookup
+10. route
+12. arp
+13. iwconfig
+14. hostname
+15. curl or wget
+16. mtr
+17. whois
+18. ifplugstatus
+19. iftop
+20. tcpdum
+
+$ifconfig
+Linux ifconfig stands for interface configurator. It is one of the most basic commands used in network inspection. 
+ifconfig is used to initialize an interface, configure it with an IP address, and enable or disable it. 
+It is also used to display the route and the network interface. 
+Basic information displayed upon using ifconfig are:
+IP address
+MAC address
+MTU(Maximum Transmission Unit) 
+
+$ip
+This is the latest and updated version of ifconfig command.
+Syntax: 
+$ip a 
+$ip addr 
+This command gives the details of all networks like ifconfig.
+This command can also be used to get the details of a specific interface.
+Commands to get details are:
+Syntax:
+$ip a show eth0  
+$ip a show lo  
+$ip a show wlan0
+
+traceroute:
+Linux traceroute is one of the most useful commands in networking. It is used to troubleshoot the network. It detects the delay and determines the pathway to your target. It basically helps in the following ways:
+
+It provides the names and identifies every device on the path. 
+It follows the route to the destination
+It determines where the network latency comes from and reports it.
+traceroute <destination>
+example:
+traceroute google.com
+The output provides the following information:
+
+The specified hostname
+Size of the packets
+The maximum number of hops required.
+The IP address.
+
+4.tracepath :
+Linux tracepath is similar to traceroute command. It is used to detect network delays. However, it doesn't require root privileges.
+It traces the route to the specified destination and identifies each hop in it. If your network is weak, it recognizes the point where the network is weak.
+Example:   
+
+tracepath google.com
+tracepath etechconsultingllc.com
+tracepath facebook.com
+
+
+5.ping
+Linux ping is one of the most used network troubleshooting commands. It basically checks for the network connectivity between two nodes.
+
+ping stands for Packet INternet Groper.
+
+The ping command sends the ICMP echo request to check the network connectivity.
+
+It keeps executing until it is interrupted.
+
+Use Ctrl+C Key to interrupt the execution.
+
+Syntax:
+ping <destination> 
+ping googlr.com
+ping -c <number> <destination>
+Functions:
+The command is used to measure the average response. If there is no response for the ping command, you can assume one of the following issues with the network:
+
+There is a physical issue causing network loss.
+The destination address might be dysfunctional or incorrect.
+The ping request is blocked due to a target.
+There might be a problem with the routing table.
+
+6.netstat
+Linux netstat command refers to the network statistics. 
+
+It provides statistical figures about different interfaces which include open sockets, routing tables, and connection information.
+
+Syntax:
+netstat
+Output:
+Observe the output displaying all the open sockets.
+
+Variations in netstat command
+
+Below are few variations of the netstat command used.
+
+a) To display the programs 
+
+Syntax:
+netstat -p
+This displays the programs associated with the open socket.
+b) To get the details of the ports
+
+Syntax:
+netstat -s
+This gives detailed statistics of all the ports.
+
+c) To get the information of the routing table 
+
+Syntax:
+netstat -r
+This gives information related to the routing table.
+
+7. dig
+Linux dig command stands for Domain Information Groper. This command is used in DNS lookup to query the DNS name server. It is also used to troubleshoot DNS related issues.
+
+8.hostname :
+Linux hostname is the simple command used to view and set the hostname of a system.
+
+9.curl & wget:
+Linux curl and wget commands are used in downloading files from the internet through CLI
+$curl -O <fileLink>
+$ wget <fileLink> 
+
+
+
+Process Management Commands:
+
+Tasks run as processes 
+ps command is short for ‘Process Status’. It displays the currently-running processes. However, unlike the top command, 
+the output generated is not in realtime.
+$ps
+The terminology is as follows :
+ PID = process ID
+ TTY = terminal type
+ TIME = total time the process has been running
+ CMD = name of the command that launches the process
+
+ To get more information using ps command use:
+ $ ps -u 
+ %CPU represents the amount of computing power the process is taking.
+ %MEM represents the amount of memory the process is taking up.
+ STAT represents process state.
+ 
+ While ps command only displays the processes that are currently running, you can also use it to list all the processes.
+ $ ps -A
+
+
+  ps -ef 
+  ps -ef | grep java 
+  ps -ef | grep http 
+  ps -ef | grep ssh 
+
+How to Find and Kill a Zombie Process:
+kill : Kill the process
+
+$ ps aux | egrep "Z|defunct"
+$ ps -o ppid= <Child PID>
+$ kill -s SIGCHLD <Parent PID>
+$ kill -9 <Parent PID>
+
+
+top : 
+
+Top command displays a list of processes that are running in real-time along with their memory and CPU usage.
+$top
+PID: Unique Process ID given to each process.
+User: Username of the process owner.
+PR: Priority given to a process while scheduling.
+NI: ‘nice’ value of a process.
+VIRT: Amount of virtual memory used by a process.
+RES: Amount of physical memory used by a process.
+SHR: Amount of memory shared with other processes.
+S: state of the process
+‘D’ = uninterruptible sleep
+‘R’ = running 
+‘S’ = sleeping 
+‘T’ = traced or stopped 
+‘Z’ = zombie
+%CPU: Percentage of CPU used by the process.
+%MEM; Percentage of RAM used by the process.
+TIME+: Total CPU time consumed by the process.
+Command: Command used to activate the process.
+
+
+#--------------------------------------------------------------------------------------------------------------------------------->
+
+Process management:
+===================
+Commands to check processes:
+$ watch --> use to analyzed real time processes every 2 seconds
+$ cat /etc/shells  --> use to check all the shells supported by the system
+$ top --> use to to analyzed all processes within the system
+$ ps --> use to get informations about running processes
+$ ps -ef  ---> use to check for a running application process within the system
+
+Native services --> These are services that can be install using package managers   
+Non-Native services --> These are services that are define by the operator in the /etc/systemd/system
+                          directory
+some files commands:
+===================
+$ ls -lth ---> to display files in a directory from biggest to smallest
+$ ls -lrth --> to display files in a directory from smallest to biggest
+
+
+
+#--------------------------------------------------------------------------------------------------------------------------------->
+
+Monday, 04-18-2022:
+==================
+How do you archive files from a directory?
+
+$ tar -cvf backup.tar $directory
+
+How do you open a tar file?
+
+$ tar -xvf $filename.tar
+
+what command will you use to donwloads files in linux?
+
+$ wget command or curl command
+
+softlinks and hardlinks:
+
+softlinks: - it is a short cut to a component
+           - If the original copy is deleted hence the softlink becomes inactive
+           - It occupies less memory since only the original copy uses resources
+
+How can you create a softlink?
+$ ln -s /home/ubuntu/test   /tmp/test
+
+Hardlinks: It is a clone link to a component
+           - If the original copy of file is deleted ,a clone will stay active
+           - Is good for data persistences but uses more resources
+
+How can you create a hardlink?
+$ ln /home/ubuntu/test /tmp/test
+
+Q: how do you modify the date and time of the server?
+    ans: date mmddHHMMyy
+    date +%r 
+    date +%m/%d/%y
+    date +%m/%d/%y:%H:%M:%S
+
+Q: how do you modify a user profile?
+       Ans: sudo vi .profile
+Q: how do you modify system profile?
+       Ans: sudo vi /etc/profile
+
+    Package management: use for redhat
+    rpm( redhat package manager)
+    rpm -qa (query all install packages)
+    rpm -qip(query info of package)
+    rpm -qlp( list content of package)
+    rpm -Uvh(to install a package)
+    yum (package manager for redhat)
+    apt or apt-get (ubuntu)
+
+
+   Variables:
+      -system Variables
+      Q: what is a variable? A variable is a replaceable entity containing a value
+      Q: what is a system variable? These are variables defined by the system
+      example USER, PATH,HOSTNAME,HOME etc
+
+      note: use the "env" command to check your environmental variables
+      -custom Variables
+
+      Q: what is a custom variable? these are variables defined by an admin or any user
+      example y=Ayo in this case 'y' is a custom variable
+
+      -special variable
+      Q: what is a special variable? These are variables defined by the system for shell functionalities
+      example $?
+      Q: How do you display the value of a variable?
+      ans: echo $variablename
+
+
+File permissions commands:
+  $ chmod 777 ---> full permissions
+  $ chown ---> gives permissions to a particular user
+
+  n-bits = 3 2^n different things 
+
+  rwx
+  r= read 
+  w= write
+  x= execute
+                 owner  group
+  -rw-rw-r-- 1 ubuntu ubuntu      4069 Apr 18 23:53 etech.log
+
+  numeric file permissions(check the channel for the table)
+
+
+
+ll $(sudo find $(pwd) -mtime +30):Use to display files and directories that are 30 days old and their permissions
+ll $(sudo find $(pwd) -type f -mtime +30): use to display only files and their permissions
+ll $(sudo find $(pwd) -type d -mtime +30): use to display directories ONLY with their permissions
+ll $(sudo find $(pwd) -name "*.sh" -type f -mtime +30): use to filter files with the .sh extension only and their permissions
+
+User Account Management:
+========================
+
+Note: Accounts you create on your shell terminal are all local accounts.
+special files:
+  1. /etc/sudoers --> is use to store user account for "sudo" privilages
+  2. /etc/profile ---> stores user profile data
+  3. /etc/ssh/sshd_config --> use to control ssh connections
+
+
+#-------------------------------------------------------------------------------------------------------------------------->
+
+Tuesday,04-19-2022:
+-=================
+User Account Management:
+========================
+
+Note: Accounts you create on your shell terminal are all local accounts.
+special files:
+  1. /etc/sudoers --> is use to store user account for "sudo" privilages
+  2. /etc/profile ---> stores user profile data
+  3. /etc/ssh/sshd_config --> use to control ssh connections
+  4. /etc/shadow  --> use to store password harsh
+
+  commands: to create local user
+$ sudo adduser akudo
+$ sudo passwd akudo --> to assign a password for user "akudo"
+
+  commands: to create local group
+$ sudo addgroup etech
+$ sudo cat /etc/group
+
+  commands: to add a user to group
+$ sudo usermod -aG etech akudo
+$ sudo gpasswd --delete akudo etech --> to remove the user from a group
+
+command: to get informations about a local user
+$ id $user  
+
+
+Command line argument:
+echo $0 = script name
+echo $? = the status of last run command
+echo $@ = number of arguments to scripts
+echo $$ = process id
+echo $1 = first argument
+echo $* = number of arguments to script
+
+additions in linux:
+
+$ expr $a + $b --> use to add two numbers
+$ bc  --> means "bash calculator" can be use to process decimal numbers
+$ echo $[ 1 + 2 ]
+
+=======================================================================================================
+# item=("mango","orange","apple","paw-paw","grape","banana")
+
+# item[0]= "mango"
+
+# if [["$item[3]" -eq "paw-paw"]]; then
+#   echo $item[3]
+#       0          1    2    3    4
+# scriptname.sh  arg1 arg2 arg3 arg4.........arg10 
+
+# echo ${10} 
+
+# [[ ]]
+
+# num1
+# num2
+# sum       sum=$[$num1 + $num2]
+#           echo $sum 
+
+#   sum=num1 + num2 
+
+  
+ # if [["${BUILD_NUMBER}" -eq "100"]]; then
+ #     sh 'docker build -t etechapp .'
+ #     echo " this build was a success"
+ #     else
+ #       sh ' docker pull $image_version'
+ #       fi 
+
+
+# ---------------------------------------------------------------------------------------------------->
+Review
+
+1. How do you check for disk free space =df -h
+2.How do you check for disk usage = du -h
+3.How can you run a script in background mode= sh scriptname.sh&, bash scriptname.sh&, ./scriptname.sh&
+4.How can you run a script during network instability= nohup bash scriptname.sh
+5. Do you know any awk commands? = yes, awk '{commands}' filename
+6. Have you use any FTP protocol before?=yes, scp, winscp
+7. What are the 3 pieces of information you need to ssh into a remote linux host= ip address, key,username
+8. how can you check the number of lines in a file= wc -l
+9. how can you check the number of words in a file= wc -w
+10.how can you compare the content of two files = diff filename1 filename2
+11.how do you troubleshoot an application running slow= to be explained later 
+12.what is your experience with incident management= to be explained later
+13.how do you access a mysql databse from your command terminal and what are the informations needed= sudo mysql -u username -p <enter>
+14.How do you show the list of databases present in mysql? = show databases; <ENTER>
+15.How do you select a database table from the database? = use tablename; <enter>
+16.which file do you check if a user is not able to ssh into a remote linux host?= /etc/ssh/sshd_config
+17.Do you have any selinux experience? yes, we enforce it for security activities within the system , $ setenforce
+18. What command can you use to change the permission of a file? = chmod
+19.how can i display the last 100 lines of a file? = tail -100 filename
+20. how do you check the presence of a word in a file?= grep keyword filename, cat filename | grep keyword, sed -n 'p/filename/keyword'
+
+
+
+#----------------------------------------------------------------------------------------------------->
+April 23,2022:
+==============
+shell scripting:
+Q: what is a shell script?
+Ans: A shell script is a collection of commands to perform automated tasks in linux/unix OS
+Q: How does the shell intepret commands within a shell script?
+Ans: The shell intepret commands in chronological steps one line at a time
+Q: what is a shebang? #!/bin/bash
+Ans: A shebang is an indicator of what shell will be use to run the commands within the script
+Q: why do we need to learn shell scripting?
+Ans: we learn shell scripting to avoid repeating tasks and safe time of administration
+
+Scripting in action:
+====================
+steps to write a shell script
+- create a file with extentsion .sh for example sudo vi scriptname.sh
+- enter the shebang first line for example #!/bin/bash, #!/bin/sh
+- enter your commands you want to automate for example 'ls' to create a script to automate ls
+Puting the above steps into a code give us these;
+
+#!/bin/bash
+ls
+bash -x test.sh --> use to debug a running script
+sed -n '/home/p' /etc/passwd --> use to search for word home in files and print it( can also modify )
+sed 's/akudo/hello/g' /etc/passwd --> search for the word 'akudo' from /etc/passwd then replace with 'hello'
+
+awk '{print $1 " "  $2}' myfile.txt
+
+What is the difference between sed and awk commands?
+ans: 
+awk is use to search data within a file and print it as output while sed is use to search characters and modify them
+awk is more robust than sed for file administration
+
+script to automate system resources checks;
+
+sudo vi monitor.sh
+#!/bin/bash
+echo "script to check system resources"
+sudo logname # to check who log into the server
+sudo whoami  # to check who is currently using the shell
+sudo df -h   # to check the disk free space of the entire server
+sudo free -m # to check memory
+sudo lscpu   # to check cpu informations
+
+NB: when you create a shell script for the first time it is not executable so make executable
+run this command 
+sudo chmod +x scriptname.sh
+to run the script you can do it in two ways
+1. sh scriptname.sh # not good for company environment
+2. ./scriptname.sh 
+==========================================================================================
+special words to remember when writting shell scripts
+'echo' is use to print information on the terminal or append, redirect
+'echo -n' to print statement and answer on the same line
+'read'  is use to read input data from the shell user
+'read -s' is use to hide input data as password,
+'read -p' is use to read input data and print data at same time
+y='string' is use to defined string variable
+y= number  no need for quotes
+ $variable is use to read the value of a variable
+
+ #this script will help us create a file and assign date created with user who runs the script
+#!/bin/bash
+echo -n " Please Enter the filename: "
+read filename
+today=`date +%m-%d-%y` 
+user=`whoami`
+touch $filename.$user.$today
+echo " thank you "
+echo " welcome to Etech Consulting " >> $filename.$user.$today
+df -h $filename.$user.$today
+# script to design an automated calculator
+#!/bin/bash
+echo -n " Please enter the first number: "
+read num1
+echo -n " Please Enter the second number: "
+read num2
+sum=$(echo "scale=4; $num1 + $num2" | bc)
+dif=$(echo "scale=4; $num1 - $num2" | bc)
+mult=$(echo "scale=4; $num1*$num2" | bc)
+divi=$(echo "scale=4; $num1 % $num2" | bc)
+float=$(echo "scale=4; $num2/$num1" | bc)
+echo " The sum is: $sum "
+echo " The difference is: $dif "
+echo " The division is: $divi "
+echo " The multiplication is: $mult "
+echo " This is awesome we just build our first calculator for Etech Consulting Engineers "
+echo " The best scripts will be rewarded a sum of \$20 by cashApp "
+echo " The floating point answer is: $float "
+
+#!/bin/bash
+#this script will be use to create git repositories
+echo -n " please enter the directory name: "
+read directory
+sudo mkdir $directory
+git init $(pwd)/$directory
+echo " use your command line terminal to access $directory directory"
+echo "And make sure it a git repository to test the script"
+ls -a $directory | grep .git #this line helps you to detect a git repository special file
+echo " make sure you see the .git file above to confirm that you actually created the repo "
+echo " This is a property of Etech ConsultingDevopsBooster course!!! "
+
+The if...else...fi statement is the next form of control statement that allows \ 
+Shell to execute statements in a controlled way and make the right choice.
+
+syntax:
+if [ expression ]
+then
+   Statement(s) to be executed if expression is true
+else
+   Statement(s) to be executed if expression is not true
+fi
+example:
+Atmcard.sh
+#!/bin/bash
+pin="2022"
+echo -n " please enter your pinnumber:"
+read -s  pinnumber
+if [[ "$pinnumber" -eq "$pin" ]]; then
+        echo "Welcome to bank of America"
+else
+        echo "Sorry incorrect pin: please try again!!"
+fi
+
+
+
+#!/bin/sh
+
+a=10
+b=20
+
+if [ $a == $b ]
+then
+   echo "a is equal to b"
+else
+   echo "a is not equal to b"
+fi
+#script to analysed special variables
+#!/bin/sh
+
+echo "File Name: $0"
+echo "First Parameter : $1"
+echo "Second Parameter : $2"
+echo "Quoted Values: $@"
+echo "Quoted Values: $*"
+echo "Total Number of Parameters : $#"
+
+output:
+$./test.sh Zara Ali
+File Name : ./test.sh
+First Parameter : Zara
+Second Parameter : Ali
+Quoted Values: Zara Ali
+Quoted Values: Zara Ali
+Total Number of Parameters : 2uykuyk
+#!/bin/bash
+#Author:Engr Rudolph
+#Company: Etech Consulting llc
+#Script will be use to test if tomcat website is up and running and take actions
+if curl -s http://etechdemo.eastus.cloudapp.azure.com:9000/projects; then
+	echo "tomcat is up and running"
+	exit 0
+else
+	echo "tomcat is down"
+	exit 1
+	echo "The exit status was captured to be `echo $?`"
+	#api call connection to azure function to trigger email notifications
+fi
+
+
+ #this script will be used to check if a user exist in a linux server and
+#Also check if the user directory is present or not
+#Before we test this script let's make sure we have already created the script
+#To add user
+
+#!/bin/bash
+
+echo -n " Please enter the username to be checked: "
+read username
+echo " Search Engine Activated!!..searching.. "
+
+if grep $username /etc/passwd; then
+echo " The user account for $username exist in the system.. "
+echo " The user $username is part of Etech ConsultingDevops course "
+elif ls -d /home/$username/; then
+echo " The directory for $username exist in the system "
+echo " Even though the $username acount does not exist "
+else
+echo " The user directory does not exist in the system "
+echo " The user account for $username does not exist "
+fi
+=======================================================================================
+
+df -h where h stands for human readable format
+free -m 
+lscpu 
+ when you type 'vi'
+ press 'i' on your keyboard (insert)
+ commands.....
+ press 'esc'
+ press 'shift' + ':'
+ :wq! to save and quit the file
+ :q!  to quit without saving
+ work: write a script to check who is log into the system
+
+ /tmp/monitor.login
+/root/logincheck.sh
+systemctl stop cron = to control cron jobs (start,stop, restart,status)
+watch ls = to see how jobs are running in a directory for every 2 seconds
+watch cat <filename> = to see real time processes in a file
+
+n jobs running and stop the deamon all the other cron jobs in same system are dead
+/etc/crontab = this is the file that you use to configure cronjobs
+
+Ex: configure a simple cronjob to continousely print "Thank you" into a file \
+called check.log every minutes
+
+ sudo apt update -y to update your server 
+ sudo apt update -y for ubuntu linux
+ sudo yum update -y for Redhat linux
+
+ solutions:
+ 1.create the file script called print.sh
+
+ etch.txt.root.
+ login=`logname`
+ echo $login
+
+ sudo yum install bc  <enter>
+ sudo apt install bc  <enter>  where bc stands for bash calculator
+
+ ``
+ $() == ls $(pwd)
+        ls `pwd`
+       text=$(echo "thank you") $output = text= thank you 
+       $text
+       \$5000
+       $5 000
+
+
+
+#------------------------------------------------------------------------------------------------------>
+Monday,04-25-2022:
+=================
+
+Logics in shell scripting:
+1. commands connections: (command1)$(command2) 
+  In this case "command2" runs first and the output is fed into "command1"
+
+  example: echo $(whoami) > etech.log
+  In the above example, "whoami" runs first then sends the output to "echo" to print in "etech.log"
+2. commands connections: command1 | command2
+   In the above case "command1" runs first then the output is fed as input to "command2"
+
+   example: cat -n /etc/passwd | grep ubuntu
+   In the above example, "cat -n /etc/passwd" runs first and feed the output into "grep" to select "ubuntu"
+
+Logical "AND" operator: [command1]&&[command2]
+
+For an "AND" operator in general, both commands must be "true" for the resultant output to be "true"
+meaning that if any of the commands fails, the whole process "fails" as well
+
+
+example: cat unknown.txt && pwd 
+Here "unknown.txt" does not exist, so we expect "error file does not exist" but we can "pwd" as a result,
+the whole result will be false 
+
+Note: These functions are extremely important to write professional scripts and reduces lines of codes
+
+Logical "OR" operator: [command1] || [command2]
+Here if any of the commands are "true", the results will be true irrespective of the other commands output
+
+example: cat unknown.txt || pwd 
+It will complain about  "cat unknown.txt" but will still run "pwd", hence result will be true
+
+Compare operators:
+Best to compare two integers(numbers)
+-eq --> equal to
+-ne --> not eqaul to 
+-lt --> less than 
+-gt --> greater than
+-ge --> greater than or equal to 
+-le --> less than or equal to 
+
+Best to compare two strings:
+= #--> equal static strings
+== #--> equal dynamic strings compare character wise
+!= #--> not equal to
+<= #--> less than or equal to 
+>= #--> greater than or equal to 
+>  #--> greater than (strict)
+<  #--> less than (strict)
+-z test if a string is empty and returns a true
+-n test if a string variable is not empty and returns a true
+
+examples:
+
+#!/bin/bash
+VAR1="devops"
+VAR2="devops"
+
+if [ "$VAR1" = "$VAR2" ]; then
+	echo " Strings are equal"
+else 
+	echo "Strings are not equal"
+fi 
+
+#!/bin/bash
+read -p "Enter first string:" var1
+read -p "Enter second string:" var2
+
+if [[ "$var1" == "$var2" ]]; then
+	echo "String are equal"
+else 
+	echo "String are not equal"
+fi
+
+How to calculate the length of a string = echo ${#var}, where "var" is the string name
+#!/bin/bash
+var=''
+if [[ -z $var ]]; then
+	echo "String is empty"
+fi
+
+#!/bin/bash
+var='Etechengineer'
+
+if [[ -n $var ]]; then
+	echo "String is not empty"
+fi
+
+
+#------------------------------------------------------------------------------------------------------>
+
+Tuesday, 04-26-2022:
+====================
+
+file check syntax:
+
+-f --> to test if it is a file
+-d --> to test if it a directory
+-r --> to test if a file has read permission
+-w --> to test if a file has write permission
+-x --> to test if a file has execution permission
+
+#!/bin/sh
+
+a=10
+b=20
+
+if [ $a = $b ]
+then
+   echo "a is equal to b"
+else
+   echo "a is not equal to b"
+fi
+#script to analysed special variables
+
+#!/bin/sh
+
+echo "File Name: $0"
+echo "First Parameter : $1"
+echo "Second Parameter : $2"
+echo "Quoted Values: $@"
+echo "Quoted Values: $*"
+echo "Total Number of Parameters : $#"
+
+Q: How do you pass command line arguments to your script at runtime?
+ans: ./scriptname.sh arg1 arg2 ....argn , where "n" can be any number
+
+output:
+$./test.sh Zara Ali
+File Name : ./test.sh
+First Parameter : Zara
+Second Parameter : Ali
+Quoted Values: Zara Ali
+Quoted Values: Zara Ali
+Total Number of Parameters : 2uykuyk
+
+#This script will be used to test if a certain file has all read write and excute permissions
+#Then assign the permission to the file
+#!/bin/bash
+echo -n " Please enter the filename to check it permissions: "
+read filename
+if [ -f $filename ]&&[ -r $filename ]&&[ -w $filename ]&&[ -x $filename ]; then
+echo " The file exist and it has all the permissions required "
+ls -l $(pwd) | grep $filename
+else
+ echo " The file lacks some permission so,we are going to add those permissions as follows "
+ echo " see the permissions before we use the script to change it for your clarity!! "
+ls -l $(pwd) | grep $filename
+sleep 5
+ echo " Changing permissions starting.... "
+ sleep 3
+ sudo chmod ugo=rwx $filename
+echo " see details below"
+ls -l $(pwd) | grep $filename
+sleep 5
+fi
+
+#!/bin/bash
+#Author:Engr Rudolph
+#Company: Etech Consulting llc
+#Script will be use to test if tomcat website is up and running and take actions
+if curl -s http://etechdemo.eastus.cloudapp.azure.com:9000/projects; then
+	echo "sonarqube is up and running"
+	exit 0
+else
+	echo "sonarqube is down"
+	exit 1
+	echo "The exit status was captured to be `echo $?`"
+	#api call connection to azure function to trigger email notifications
+fi
+
+
+ #this script will be used to check if a user exist in a linux server and
+#Also check if the user directory is present or not
+#Before we test this script let's make sure we have already created the script
+#To add user
+
+#!/bin/bash
+
+echo -n " Please enter the username to be checked: "
+read username
+echo " Search Engine Activated!!..searching.. "
+
+if grep $username /etc/passwd; then
+echo " The user account for $username exist in the system.. "
+echo " The user $username is part of Etech ConsultingDevops course "
+elif ls -d /home/$username/; then
+echo " The directory for $username exist in the system "
+echo " Even though the $username acount does not exist "
+else
+echo " The user directory does not exist in the system "
+echo " The user account for $username does not exist "
+fi
+===================================================================================================
+for loop: use to interate over a set of values to archive control loop in programming
+
+#!/bin/bash
+days=( mon tue wed )
+for i in ${days[@]}; do
+        echo $i
+done
+
+${days[@]}= ${days[0]}
+            ${days[1]}
+            ${days[2]}
+
+
+steps to configure an automated file destribution script with 2 remote servers:
+
+step1: create two ec2 instances
+follow previous videos
+- Capture the private ip addresses of all your remote servers
+
+step2: create two identical user accounts on each remote servers
+$ sudo adduser Etech # make sure you give the user a password
+$ sudo passwd Etech 
+
+step3: Enable password authentication in /etc/ssh/sshd_config
+caution: do not break the file
+
+step4: restart sshd service 
+$ sudo systemctl restart sshd 
+
+step5: repeat from step3 for all your remote servers
+
+step6: create your script and run it
+
+step7: check the remote server to make sure your script actually move the file over
+
+Hints; if you hit any error about sshpass then run this
+  $ sudo apt install sshpass -y # to install sshpass command on your local machine
+
+  note: run 
+  $ sudo chown -R $user /tmp
+
+#!/bin/bash
+ips=( 172.31.42.99  172.31.45.158 )
+
+for i in ${ips[@]}; do
+scp -i key ubuntu@$i:/tmp
+done 
+
+enterprise case study:
+
+#!/bin/bash
+password="Team2"
+user="etech1"
+ips=( 172.31.42.99  172.31.45.158 )
+
+for i in ${ips[@]}; do
+sshpass -p "$password" scp  etech.log $user@$i:/tmp
+done
+
+
+================================================================================================
+
+for day in mon tue wed thur fri sat sun; do 
+  echo $day 
+  done  
+
+items=(orange mango apple banana)
+items[0]=orange
+items[1]=mango
+items[2]=apple
+items[3]=banana
+echo ${items[0]}=orange
+echo ${items[1]}=mango
+echo ${items[2]}=apple
+echo ${items[3]}=banana
+
+
+echo ${items[0]} =orange 
+
+scriptname.sh arg1 arg2 arg3 ....arg
+${@}
+
+echo ${items[0]}
+echo ${items[1]}
+echo ${items[2]}
+echo ${items[3]}
+
+./scriptname.sh arg1 arg2 arg3
+
+
+i=$[$i + 1]
+echo $i
+         0    1     2   3      
+items=(book pencil pen bag)
+
+items[0]=book
+items[1]=pencil
+items[2]=pen
+items[3]=bag
+
+${items[0]}
+${items[1]}
+${items[2]}
+${items[3]}
+
+for x in ${items[@]}; do
+	echo $x 
+done
+
+
+
+
+
+
+#--------------------------------------------------------------------------------------------------->
+
+how to get environmental variables in linux.
+copy and paste the below link in your browser to explore environmental variables and how to use or set them.
+
+
+
+How To Read and Set Environmental and Shell Variables on Linux:
+Introduction:
+When interacting with your server through a shell session, there are many pieces of information that your shell compiles to determine its behavior and access to resources. Some of these settings are contained within configuration settings and others are determined by user input.
+
+One way that the shell keeps track of all of these settings and details is through an area it maintains called the environment. The environment is an area that the shell builds every time that it starts a session that contains variables that define system properties.
+
+In this guide, we will discuss how to interact with the environment and read or set environmental and shell variables interactively and through configuration files.
+
+To follow along with this tutorial using a terminal in your browser, click the Launch an Interactive Terminal! button below:
+
+Launch an Interactive Terminal!
+
+Otherwise if you’d like to follow along using your local system or a remote server, open a terminal and run the commands from this tutorial there.
+
+How the Environment and Environmental Variables Work
+Every time a shell session spawns, a process takes place to gather and compile information that should be available to the shell process and its child processes. It obtains the data for these settings from a variety of different files and settings on the system.
+
+The environment provides a medium through which the shell process can get or set settings and, in turn, pass these on to its child processes.
+
+The environment is implemented as strings that represent key-value pairs. If multiple values are passed, they are typically separated by colon (:) characters. Each pair will generally look something like this:
+
+KEY=value1:value2:...
+If the value contains significant white-space, quotations are used:
+
+KEY="value with spaces"
+The keys in these scenarios are variables. They can be one of two types, environmental variables or shell variables.
+
+Environmental variables are variables that are defined for the current shell and are inherited by any child shells or processes. Environmental variables are used to pass information into processes that are spawned from the shell.
+
+Shell variables are variables that are contained exclusively within the shell in which they were set or defined. They are often used to keep track of ephemeral data, like the current working directory.
+
+By convention, these types of variables are usually defined using all capital letters. This helps users distinguish environmental variables within other contexts.
+
+
+Common Environmental and Shell Variables
+Some environmental and shell variables are very useful and are referenced fairly often. Here are some common environmental variables that you will come across:
+
+SHELL: This describes the shell that will be interpreting any commands you type in. In most cases, this will be bash by default, but other values can be set if you prefer other options.
+TERM: This specifies the type of terminal to emulate when running the shell. Different hardware terminals can be emulated for different operating requirements. You usually won’t need to worry about this though.
+USER: The current logged in user.
+PWD: The current working directory.
+OLDPWD: The previous working directory. This is kept by the shell in order to switch back to your previous directory by running cd -.
+LS_COLORS: This defines color codes that are used to optionally add colored output to the ls command. This is used to distinguish different file types and provide more info to the user at a glance.
+MAIL: The path to the current user’s mailbox.
+PATH: A list of directories that the system will check when looking for commands. When a user types in a command, the system will check directories in this order for the executable.
+LANG: The current language and localization settings, including character encoding.
+HOME: The current user’s home directory.
+_: The most recent previously executed command.
+
+In addition to these environmental variables, some shell variables that you’ll often see are:
+
+BASHOPTS: The list of options that were used when bash was executed. This can be useful for finding out if the shell environment will operate in the way you want it to.
+BASH_VERSION: The version of bash being executed, in human-readable form.
+BASH_VERSINFO: The version of bash, in machine-readable output.
+COLUMNS: The number of columns wide that are being used to draw output on the screen.
+DIRSTACK: The stack of directories that are available with the pushd and popd commands.
+HISTFILESIZE: Number of lines of command history stored to a file.
+HISTSIZE: Number of lines of command history allowed in memory.
+HOSTNAME: The hostname of the computer at this time.
+IFS: The internal field separator to separate input on the command line. By default, this is a space.
+PS1: The primary command prompt definition. This is used to define what your prompt looks like when you start a shell session. The PS2 is used to declare secondary prompts for when a command spans multiple lines.
+SHELLOPTS: Shell options that can be set with the set option.
+UID: The UID of the current user.
