@@ -1,0 +1,89 @@
+Monday,04-25-2022:
+
+Logics in shell scripting:
+1. commands connections: (command1)$(command2) 
+  In this case "command2" runs first and the output is fed into "command1"
+
+  example: echo $(whoami) > etech.log
+  In the above example, "whoami" runs first then sends the output to "echo" to print in "etech.log"
+2. commands connections: command1 | command2
+   In the above case "command1" runs first then the output is fed as input to "command2"
+
+   example: cat -n /etc/passwd | grep ubuntu
+   In the above example, "cat -n /etc/passwd" runs first and feed the output into "grep" to select "ubuntu"
+
+Logical "AND" operator: [command1]&&[command2]
+
+For an "AND" operator in general, both commands must be "true" for the resultant output to be "true"
+meaning that if any of the commands fails, the whole process "fails" as well
+
+
+example: cat unknown.txt && pwd 
+Here "unknown.txt" does not exist, so we expect "error file does not exist" but we can "pwd" as a result,
+the whole result will be false 
+
+Note: These functions are extremely important to write professional scripts and reduces lines of codes
+
+Logical "OR" operator: [command1] || [command2]
+Here if any of the commands are "true", the results will be true irrespective of the other commands output
+
+example: cat unknown.txt || pwd 
+It will complain about  "cat unknown.txt" but will still run "pwd", hence result will be true
+
+Compare operators:
+Best to compare two integers(numbers)
+-eq --> equal to
+-ne --> not eqaul to 
+-lt --> less than 
+-gt --> greater than
+-ge --> greater than or equal to 
+-le --> less than or equal to 
+
+Best to compare two strings:
+= #--> equal static strings
+== #--> equal dynamic strings compare character wise
+!= #--> not equal to
+<= #--> less than or equal to 
+>= #--> greater than or equal to 
+>  #--> greater than (strict)
+<  #--> less than (strict)
+-z test if a string is empty and returns a true
+-n test if a string variable is not empty and returns a true
+
+examples:
+
+#!/bin/bash
+VAR1="devops"
+VAR2="devops"
+
+if [ "$VAR1" = "$VAR2" ]; then
+	echo " Strings are equal"
+else 
+	echo "Strings are not equal"
+fi 
+
+#!/bin/bash
+read -p "Enter first string:" var1
+read -p "Enter second string:" var2
+
+if [[ "$var1" == "$var2" ]]; then
+	echo "String are equal"
+else 
+	echo "String are not equal"
+fi
+
+How to calculate the length of a string = echo ${#var}, where "var" is the string name
+#!/bin/bash
+var=''
+if [[ -z $var ]]; then
+	echo "String is empty"
+fi
+
+#!/bin/bash
+var='Engineer'
+
+if [[ -n $var ]]; then
+	echo "String is not empty"
+fi
+
+
